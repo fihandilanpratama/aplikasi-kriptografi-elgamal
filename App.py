@@ -4,6 +4,7 @@ import functions
 
 root = Tk()
 root.title("Aplikasi Kriptografi Elgamal Sederhana")
+# root.iconbitmap('@/home/fihan/code/aplikasi-kriptografi-elgamal/emblemencryptedlocked_93479.xbm')
 root.geometry("760x600")
 
 def btn_clear():

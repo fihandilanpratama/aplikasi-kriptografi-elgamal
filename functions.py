@@ -1,14 +1,9 @@
 import numpy as np
 import random
 
-def convertPlaintext(m):
-  temp = []
-  for x in m:
-      temp.append(ord(x))
-  return temp
 
 def encryptPlaintext(plaintext, p, g, y):
-  convertedPlaintext = convertPlaintext(plaintext)
+  convertedPlaintext = [ord(i) for i in plaintext]
   temp = []
   k = random.randint(0, p - 1)
   for i in convertedPlaintext:
@@ -48,20 +43,15 @@ def decryptChipertext(string_chipertext, x, p):
 
   # perulangan dekrip (a b)
   i = 0
-  temp = []
+  list_plaintext = []
   while i < len(list_chipertext):
       c = pow(int(list_chipertext[i]), int(p) - 1 - int(x)) % int(p)
       m = (int(list_chipertext[i+1]) * c) % int(p)
-      temp.append(m)
+      list_plaintext.append(m)
       i = i + 2  # lompat 2 untuk a b berikutnya
-  # print(temp)
-  convertedChipertext = convertChipertext(temp)
-  return ''.join(map(str, convertedChipertext))
-
-def convertChipertext(chipertext):
-  plaintext = []
-  for i in chipertext:
-    plaintext.append(chr(i))
+  # print(list_plaintext)
+  convertedPlaintext = [chr(i) for i in list_plaintext]
+  plaintext = ''.join(map(str, convertedPlaintext))
   return plaintext
 
 # generate key
@@ -73,20 +63,3 @@ def getPropertyValues():
   x = random.randint(0, p - 1)
   y = (g**x) % p      # public key
   return {"p" : p, "g" : g, "x" : x, "y" : y}
-  
-
-# enkrip
-# convertedPlaintext = convertPlaintext(plaintext)
-# chipertext = getChipertext(convertedPlaintext)
-# print("chipertext : ", chipertext)
-
-# dekrip
-# ask = input("dekrip ? (y/n) : ")
-# if ask == "y":
-#   convertedChipertext = convertChipertext(chipertext)
-#   plaintext2 = getPlaintext(convertedChipertext)
-#   print(convertedChipertext)
-#   print(plaintext2)
-
-# else:
-#   print("selesai")
